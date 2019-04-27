@@ -79236,7 +79236,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  flex: 1;\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  grid-template-rows: 1fr;\n  grid-template-areas: \"video video video chat\";\n  background: #e6eaed;\n"]);
+  var data = _taggedTemplateLiteral(["\n  flex: 1;\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  grid-template-rows: 1fr;\n  grid-template-areas: \"video video video video\";\n  background: #e6eaed;\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -79339,7 +79339,7 @@ var App = function App(_ref) {
   return _react.default.createElement(_simplewebrtc.Provider, {
     configUrl: configUrl,
     userData: userData
-  }, _react.default.createElement(_simplewebrtc.RemoteAudioPlayer, null), _react.default.createElement(_simplewebrtc.Connecting, null, _react.default.createElement("h1", null, "Connecting...")), _react.default.createElement(_simplewebrtc.Disconnected, null, _react.default.createElement("h1", null, "Lost connection. Reattempting to join...")), _react.default.createElement(_simplewebrtc.Connected, null, _react.default.createElement(_simplewebrtc.RequestUserMedia, {
+  }, _react.default.createElement(_simplewebrtc.RemoteAudioPlayer, null), _react.default.createElement(_simplewebrtc.Connected, null, _react.default.createElement(_simplewebrtc.RequestUserMedia, {
     audio: true,
     video: true,
     auto: true
@@ -79365,47 +79365,7 @@ var App = function App(_ref) {
     var localScreens = localVideos.filter(function (m) {
       return m.screenCapture;
     });
-    return _react.default.createElement(_Styles.StyledUIContainer, null, _react.default.createElement(_Styles.StyledToolbar, null, _react.default.createElement("h1", null, room.providedName), _react.default.createElement("div", null, _react.default.createElement("span", null, peers.length, " Peer", peers.length !== 1 ? 's' : ''), _react.default.createElement(_simplewebrtc.PeerList, {
-      room: room.address,
-      speaking: true,
-      render: function render(_ref3) {
-        var peers = _ref3.peers;
-
-        if (peers.length === 0) {
-          return null;
-        }
-
-        return _react.default.createElement("span", null, " (", peers.length, " speaking)");
-      }
-    })), _react.default.createElement("div", null, !!!localScreens.length && _react.default.createElement(_simplewebrtc.RequestDisplayMedia, null), !!localScreens.length && _react.default.createElement(_simplewebrtc.MediaControls, {
-      media: localScreens[0],
-      autoRemove: true,
-      render: function render(_ref4) {
-        var stopSharing = _ref4.stopSharing;
-        return _react.default.createElement("button", {
-          onClick: stopSharing
-        }, "Stop Screenshare");
-      }
-    })), _react.default.createElement(_simplewebrtc.UserControls, {
-      render: function render(_ref5) {
-        var user = _ref5.user,
-            isMuted = _ref5.isMuted,
-            mute = _ref5.mute,
-            unmute = _ref5.unmute,
-            setDisplayName = _ref5.setDisplayName;
-        return _react.default.createElement("div", null, _react.default.createElement(_reactContenteditable.default, {
-          className: "display-name-editor",
-          html: user.displayName,
-          onChange: function onChange(event) {
-            setDisplayName(event.target.value.trim());
-          }
-        }), _react.default.createElement("button", {
-          onClick: function onClick() {
-            return isMuted ? unmute() : mute();
-          }
-        }, isMuted ? 'Unmute' : 'Mute'));
-      }
-    })), _react.default.createElement(_Styles.StyledMainContainer, null, _react.default.createElement(_Styles.StyledVideoContainer, null, _react.default.createElement(_simplewebrtc.GridLayout, {
+    return _react.default.createElement(_Styles.StyledUIContainer, null, _react.default.createElement(_Styles.StyledMainContainer, null, _react.default.createElement(_Styles.StyledVideoContainer, null, _react.default.createElement(_simplewebrtc.GridLayout, {
       className: "videogrid",
       items: [].concat(_toConsumableArray(localVideos), _toConsumableArray(remoteVideos)),
       renderCell: function renderCell(item) {
@@ -79446,30 +79406,15 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // --------------------------------------------------------------------
 var API_KEY = '0f5ff97f17b7fc67b76095f7'; // ====================================================================
 
-var CONFIG_URL = "https://api.simplewebrtc.com/config/guest/".concat(API_KEY); // The provided `createStore` function makes a basic Redux
-// store useful for getting things started. If you want to
-// make your own, import `reducer` from '@andyet/simplewebrtc' and
-// be sure to assign it to `simplewebrtc` in the top level of
-// your state object.
-
-var store = (0, _simplewebrtc.createStore)(); // We're exposing these here to make it easier for experimenting
-// with the actions and selectors in the console.
-//
-// This is NOT required for SimpleWebRTC to function.
-
+var CONFIG_URL = "https://api.simplewebrtc.com/config/guest/".concat(API_KEY);
+var store = (0, _simplewebrtc.createStore)();
 window.store = store;
 window.actions = _simplewebrtc.Actions;
 window.selectors = _simplewebrtc.Selectors;
 var params = new URLSearchParams(window.location.search);
 
-if (!params.get('room')) {
-  // We're using a UUID for a random room name here, but that is
-  // NOT a requirement for SimpleWebRTC to function.
-  window.location = "/?room=".concat(UUID.v4());
-}
-
 if (API_KEY === 'YOUR_API_KEY') {
-  _reactDom.default.render(_react.default.createElement("p", null, "You need to configure the app with your API key. See ", _react.default.createElement("code", null, "src/index.js")), document.getElementById("app"));
+  _reactDom.default.render(_react.default.createElement("p", null, "You need to configure the app with your API key. See", ' ', _react.default.createElement("code", null, "src/index.js")), document.getElementById('app'));
 } else {
   _reactDom.default.render(_react.default.createElement(_reactRedux.Provider, {
     store: store
@@ -79477,7 +79422,7 @@ if (API_KEY === 'YOUR_API_KEY') {
     configUrl: CONFIG_URL,
     roomName: params.get('room'),
     roomPassword: params.get('key') || ''
-  })), document.getElementById("app"));
+  })), document.getElementById('app'));
 }
 },{"react-redux":"../node_modules/react-redux/es/index.js","uuid":"../node_modules/uuid/index.js","react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","@andyet/simplewebrtc":"../node_modules/@andyet/simplewebrtc/index.js","./components/App":"components/App.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -79507,7 +79452,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53609" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63916" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
